@@ -1,0 +1,206 @@
+func NewCoreAPI
+func NewCoreAPI(n *core.IpfsNode) coreiface.CoreAPI
+
+NewCoreAPI创建由go-ipfs节点支持的IPFS CoreAPI的新实例。
+func ParseCid
+func ParseCid(c *cid.Cid) coreiface.Path
+
+ParseCid解析路径c，返回解析后的路径。
+func ParsePath
+func ParsePath(p string) (coreiface.Path, error)
+
+ParsePath p使用ipfspath解析器解析路径，返回解析的路径。
+func ResolvedPath
+func ResolvedPath(p string, c *cid.Cid, r *cid.Cid) coreiface.Path
+
+ResolvePath从string p解析路径，返回解析的路径。
+type BlockAPI
+type BlockAPI CoreAPI
+
+func (*BlockAPI) Get
+func (api *BlockAPI) Get(ctx context.Context, p coreiface.Path) (io.Reader, error)
+
+func (*BlockAPI) Put
+func (api *BlockAPI) Put(ctx context.Context, src io.Reader, opts ...caopts.BlockPutOption) (coreiface.Path, error)
+
+func（* BlockAPI）Rm
+func (api *BlockAPI) Rm(ctx context.Context, p coreiface.Path, opts ...caopts.BlockRmOption) error
+
+func（* BlockAPI）Stat
+func (api *BlockAPI) Stat(ctx context.Context, p coreiface.Path) (coreiface.BlockStat, error)
+
+type BlockStat
+type BlockStat struct {
+    // contains filtered or unexported fields
+}
+
+func (*BlockStat) Path
+func (bs *BlockStat) Path() coreiface.Path
+
+func (*BlockStat) Size
+func (bs *BlockStat) Size() int
+
+type CoreAPI
+type CoreAPI struct {
+    // contains filtered or unexported fields
+}
+
+func (*CoreAPI) Block
+func (api *CoreAPI) Block() coreiface.BlockAPI
+
+Block返回由go-ipfs节点支持的BlockAPI接口实现
+func（* CoreAPI）Dag
+func (api *CoreAPI) Dag() coreiface.DagAPI
+
+Dag返回由go-ipfs节点支持的DagAPI接口实现
+func (*CoreAPI) Key
+func (api *CoreAPI) Key() coreiface.KeyAPI
+
+Key返回由go-ipfs节点支持的KeyAPI接口实现
+func (*CoreAPI) Name
+func (api *CoreAPI) Name() coreiface.NameAPI
+
+Name返回由go-ipfs节点支持的NameAPI接口实现
+func (*CoreAPI) Object
+func (api *CoreAPI) Object() coreiface.ObjectAPI
+
+Object返回由go-ipfs节点支持的ObjectAPI接口实现
+func（* CoreAPI）Pin
+func (api *CoreAPI) Pin() coreiface.PinAPI
+
+Pin返回由go-ipfs节点支持的PinAPI接口实现
+func（* CoreAPI）ResolveNode
+func (api *CoreAPI) ResolveNode(ctx context.Context, p coreiface.Path) (ipld.Node, error)
+
+ResolveNode p使用Unixfx解析器解析路径，获取并返回已解析的节点。
+func（* CoreAPI）ResolvePath
+func (api *CoreAPI) ResolvePath(ctx context.Context, p coreiface.Path) (coreiface.Path, error)
+
+ResolvePath p使用Unixfs解析器解析路径，返回已解析的路径。TODO：在Path中存储所有ipfspath.Resolver.ResolvePathComponents（）
+func（* CoreAPI）Unixfs
+func (api *CoreAPI) Unixfs() coreiface.UnixfsAPI
+
+Unixfs返回由go-ipfs节点支持的UnixfsAPI接口实现
+type DagAPI
+type DagAPI CoreAPI
+
+func (*DagAPI) Get
+func (api *DagAPI) Get(ctx context.Context, path coreiface.Path) (ipld.Node, error)
+
+path使用Unixfs解析器获取解析，返回已解析的节点。
+func（* DagAPI）Put
+func (api *DagAPI) Put(ctx context.Context, src io.Reader, opts ...caopts.DagPutOption) (coreiface.Path, error)
+
+使用指定格式和输入编码插入数据。除非与WithCodes或一起使用，否则使用 WithHash默认值“dag-cbor”和“sha256”。返回插入数据的路径。
+func（* DagAPI）Tree
+func (api *DagAPI) Tree(ctx context.Context, p coreiface.Path, opts ...caopts.DagTreeOption) ([]coreiface.Path, error)
+
+Tree返回路径指定的节点内的路径列表p。
+type KeyAPI
+type KeyAPI CoreAPI
+
+func（* KeyAPI）Generate
+func (api *KeyAPI) Generate(ctx context.Context, name string, opts ...caopts.KeyGenerateOption) (coreiface.Key, error)
+
+生成生成新密钥，将其存储在指定名称下的密钥库中，并返回其公钥的base58编码多哈。
+func（* KeyAPI）List
+func (api *KeyAPI) List(ctx context.Context) ([]coreiface.Key, error)
+
+List返回存储在keystore中的列表键。
+func（* KeyAPI）Remove
+func (api *KeyAPI) Remove(ctx context.Context, name string) (coreiface.Path, error)
+
+删除从密钥库中删除密钥。返回已删除密钥的ipns路径。
+func（* KeyAPI）Rename
+func (api *KeyAPI) Rename(ctx context.Context, oldName string, newName string, opts ...caopts.KeyRenameOption) (coreiface.Key, bool, error)
+
+重命名重命名oldName为newName。返回密钥以及是否覆盖了另一个密钥或错误。
+type Link
+type Link struct {
+    Name, Hash string
+    Size       uint64
+}
+
+type NameAPI
+type NameAPI CoreAPI
+
+func（* NameAPI）Publish
+func (api *NameAPI) Publish(ctx context.Context, p coreiface.Path, opts ...caopts.NamePublishOption) (coreiface.IpnsEntry, error)
+
+发布宣布新的IPNS名称并返回新的IPNS条目。
+func（* NameAPI）Resolve
+func (api *NameAPI) Resolve(ctx context.Context, name string, opts ...caopts.NameResolveOption) (coreiface.Path, error)
+
+解决尝试解析指定名称的最新版本并返回其路径的问题。
+type Node
+type Node struct {
+    Links []Link
+    Data  string
+}
+
+type ObjectAPI
+type ObjectAPI CoreAPI
+
+func（* ObjectAPI）AddLink
+func (api *ObjectAPI) AddLink(ctx context.Context, base coreiface.Path, name string, child coreiface.Path, opts ...caopts.ObjectAddLinkOption) (coreiface.Path, error)
+
+func（* ObjectAPI）AppendData
+func (api *ObjectAPI) AppendData(ctx context.Context, path coreiface.Path, r io.Reader) (coreiface.Path, error)
+
+func（* ObjectAPI）Data
+func (api *ObjectAPI) Data(ctx context.Context, path coreiface.Path) (io.Reader, error)
+
+func（* ObjectAPI）Get
+func (api *ObjectAPI) Get(ctx context.Context, path coreiface.Path) (ipld.Node, error)
+
+func（* ObjectAPI）Links
+func (api *ObjectAPI) Links(ctx context.Context, path coreiface.Path) ([]*ipld.Link, error)
+
+func（* ObjectAPI）New
+func (api *ObjectAPI) New(ctx context.Context, opts ...caopts.ObjectNewOption) (ipld.Node, error)
+
+func（* ObjectAPI）Put
+func (api *ObjectAPI) Put(ctx context.Context, src io.Reader, opts ...caopts.ObjectPutOption) (coreiface.Path, error)
+
+func（* ObjectAPI）RmLink
+func (api *ObjectAPI) RmLink(ctx context.Context, base coreiface.Path, link string) (coreiface.Path, error)
+
+func（* ObjectAPI）SetData
+func (api *ObjectAPI) SetData(ctx context.Context, path coreiface.Path, r io.Reader) (coreiface.Path, error)
+
+func（* ObjectAPI）Stat
+func (api *ObjectAPI) Stat(ctx context.Context, path coreiface.Path) (*coreiface.ObjectStat, error)
+
+type PinAPI
+type PinAPI CoreAPI
+
+func（* PinAPI）Add
+func (api *PinAPI) Add(ctx context.Context, p coreiface.Path, opts ...caopts.PinAddOption) error
+
+func（* PinAPI）Ls
+func (api *PinAPI) Ls(ctx context.Context, opts ...caopts.PinLsOption) ([]coreiface.Pin, error)
+
+func（* PinAPI）Rm
+func (api *PinAPI) Rm(ctx context.Context, p coreiface.Path) error
+
+func（* PinAPI）Update
+func (api *PinAPI) Update(ctx context.Context, from coreiface.Path, to coreiface.Path, opts ...caopts.PinUpdateOption) error
+
+func（* PinAPI）Verify
+func (api *PinAPI) Verify(ctx context.Context) (<-chan coreiface.PinStatus, error)
+
+type UnixfsAPI
+type UnixfsAPI CoreAPI
+
+func（* UnixfsAPI）Add
+func (api *UnixfsAPI) Add(ctx context.Context, r io.Reader) (coreiface.Path, error)
+
+Add从阅读器构建merkledag节点，将其添加到blockstore，并返回表示该节点的键。
+func（* UnixfsAPI）Cat
+func (api *UnixfsAPI) Cat(ctx context.Context, p coreiface.Path) (coreiface.Reader, error)
+
+Cat返回路径上IPFS或IPNS对象包含的数据p。
+func（* UnixfsAPI）Ls
+func (api *UnixfsAPI) Ls(ctx context.Context, p coreiface.Path) ([]*ipld.Link, error)
+
+Ls返回路径为p的IPFS或IPNS对象的内容，格式为： <link base58 hash> <link size in bytes> <link name>
