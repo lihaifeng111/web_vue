@@ -1,0 +1,1054 @@
+Centos7 不用apt-get 而是用yum
+wget https://dl.google.com/go/go1.10.2.linux-amd64.tar.gz (直接下载)
+tar -C /usr/local -xzf go1.10.2.linux-amd64.tar.gz（解压）
+vim /etc/profile 
+export GOROOT=/usr/local/go
+export GOBIN=$GOROOT/bin
+export PATH=$PATH:$GOBIN
+export GOPATH=/opt/gopath
+source /etc/profile （使配置的生效）
+[root@localhost ~]# mkdir -p $GOPATH/src
+[root@localhost ~]# mkdir -p $GOPATH/pkg
+[root@localhost ~]# mkdir -p $GOPATH/bin
+[root@localhost ~]# cd $GOPATH
+[root@localhost gopath]# ls
+
+安装git:
+yum install git  (或者ubuntu的是：apt-get install git)
+
+
+
+[lhf@localhost 桌面]$ 
+[lhf@localhost 桌面]$ vim /etc/profile
+[lhf@localhost 桌面]$ sudo vim /etc/profile
+[lhf@localhost 桌面]$ sudo vim /etc/profile
+[lhf@localhost 桌面]$ source /etc/profile
+[lhf@localhost 桌面]$ go version
+go version go1.10.2 linux/amd64
+[lhf@localhost 桌面]$ cd
+[lhf@localhost ~]$ ls
+公共  模板  视频  图片  文档  下载  音乐  桌面
+[lhf@localhost ~]$ ls -ah
+.   .bash_logout   .bashrc  .config    .ICEauthority  .mozilla  公共  视频  文档  音乐
+..  .bash_profile  .cache   .esd_auth  .local         .viminfo  模板  图片  下载  桌面
+[lhf@localhost ~]$ ^C
+[lhf@localhost ~]$ ^C
+[lhf@localhost ~]$ vim .bashrc
+[lhf@localhost ~]$ source ./.bashrc 
+[lhf@localhost ~]$ 
+[lhf@localhost ~]$ 
+[lhf@localhost ~]$ go version
+go version go1.10.2 linux/amd64
+[lhf@localhost ~]$ mkdir -p $GOPATH/src
+mkdir: 无法创建目录"/opt/gopath": 权限不够
+[lhf@localhost ~]$ mkdir -p $GOPATH/pkg
+mkdir: 无法创建目录"/opt/gopath": 权限不够
+[lhf@localhost ~]$ mkdir -p $GOPATH/bin^C
+[lhf@localhost ~]$ sudo su
+[root@localhost lhf]# mkdir -p $GOPATH/src
+[root@localhost lhf]# mkdir -p $GOPATH/pkg
+[root@localhost lhf]# mkdir -p $GOPATH/bin
+[root@localhost lhf]# 
+[root@localhost lhf]# 
+[root@localhost lhf]# cd $GOPATH
+[root@localhost ~]# source /etc/profile
+[root@localhost ~]# cd $GOPATH
+bash: cd: /opt/gopath: 没有那个文件或目录
+[root@localhost ~]# mkdir -p $GOPATH/src
+[root@localhost ~]# mkdir -p $GOPATH/pkg
+[root@localhost ~]# mkdir -p $GOPATH/bin
+[root@localhost ~]# cd $GOPATH
+[root@localhost gopath]# ls
+bin  pkg  src
+[root@localhost gopath]# cd src/
+[root@localhost src]# ls
+[root@localhost src]# mkdir -p $GOPATH/src/github.com/hyperledger
+[root@localhost src]# cd $GOPATH/src/github.com/hyperledger
+[root@localhost hyperledger]# git clone -b v1.2.0 https://github.com/hyperledger/fabric.git
+正克隆到 'fabric'...
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 85690 (delta 0), reused 0 (delta 0), pack-reused 85686
+接收对象中: 100% (85690/85690), 81.59 MiB | 5.03 MiB/s, done.
+处理 delta 中: 100% (55163/55163), done.
+Note: checking out 'cae2ad4456914adffcb07b1ca873e9624ce8f8b3'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+[root@localhost hyperledger]# ls
+fabric
+[root@localhost hyperledger]# mkdir fabric/singlepeer
+[root@localhost hyperledger]# cd $GOPATH/src/
+[root@localhost src]# ls
+github.com
+[root@localhost src]# git clone -b v1.2.0 https://github.com/hyperledger/fabric.git
+正克隆到 'fabric'...
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (4/4), done.
+^C收对象中:  20% (17257/85690), 17.18 MiB | 391.00 KiB/s   
+[root@localhost src]# git clone -b dev https://github.com/niming2100/tvm-light.git
+正克隆到 'tvm-light'...
+remote: Enumerating objects: 99, done.
+remote: Counting objects: 100% (99/99), done.
+remote: Compressing objects: 100% (47/47), done.
+remote: Total 99 (delta 27), reused 91 (delta 22), pack-reused 0
+Unpacking objects: 100% (99/99), done.
+[root@localhost src]# cd github.com/hyperledger/fabric/singlepeer/
+[root@localhost singlepeer]# wget https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric/linux-amd64-1.2.0/hyperledger-fabric-linux-amd64-1.2.0.tar.gz
+--2019-01-02 19:30:29--  https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric/linux-amd64-1.2.0/hyperledger-fabric-linux-amd64-1.2.0.tar.gz
+正在解析主机 nexus.hyperledger.org (nexus.hyperledger.org)... 199.19.212.106
+正在连接 nexus.hyperledger.org (nexus.hyperledger.org)|199.19.212.106|:443... 已连接。
+已发出 HTTP 请求，正在等待回应... 200 OK
+长度：40919608 (39M) [application/x-gzip]
+正在保存至: “hyperledger-fabric-linux-amd64-1.2.0.tar.gz”
+
+62% [===========================>                  ] 25,595,108  55.4KB/s 用时 3m 41s 
+
+2019-01-02 19:49:17 (113 KB/s) - 在 25595108/40919608 字节处发生读取错误 (成功)。重试中。
+
+--2019-01-02 19:49:18--  (尝试次数： 2)  https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric/linux-amd64-1.2.0/hyperledger-fabric-linux-amd64-1.2.0.tar.gz
+正在连接 nexus.hyperledger.org (nexus.hyperledger.org)|199.19.212.106|:443... 已连接。
+已发出 HTTP 请求，正在等待回应... 206 Partial Content
+长度：40919608 (39M)，剩余 15324500 (15M) [application/x-gzip]
+正在保存至: “hyperledger-fabric-linux-amd64-1.2.0.tar.gz”
+
+100%[++++++++++++++++++++++++++++=================>] 40,919,608   814KB/s 用时 23s    
+
+2019-01-02 19:49:42 (656 KB/s) - 已保存 “hyperledger-fabric-linux-amd64-1.2.0.tar.gz” [40919608/40919608])
+
+[root@localhost singlepeer]# tar -xvf hyperledger-fabric-linux-amd64-1.2.0.tar.gz
+bin/
+bin/configtxgen
+bin/cryptogen
+bin/idemixgen
+bin/discover
+bin/configtxlator
+bin/peer
+bin/orderer
+bin/get-docker-images.sh
+config/
+config/configtx.yaml
+config/core.yaml
+config/orderer.yaml
+[root@localhost singlepeer]# chmod -R 777 ./bin
+[root@localhost singlepeer]# cp /opt/gopath/src/tvm-light/*.yaml .
+[root@localhost singlepeer]# ./bin/cryptogen generate --config=./crypto-config.yaml
+org1.example.com
+[root@localhost singlepeer]# mkdir channel-artifacts
+[root@localhost singlepeer]# ./bin/configtxgen -profile OneOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
+2019-01-02 19:55:26.943 CST [common/tools/configtxgen] main -> WARN 001 Omitting the channel ID for configtxgen is deprecated.  Explicitly passing the channel ID will be required in the future, defaulting to 'testchainid'.
+2019-01-02 19:55:26.943 CST [common/tools/configtxgen] main -> INFO 002 Loading configuration
+2019-01-02 19:55:26.982 CST [msp] getMspConfig -> INFO 003 Loading NodeOUs
+2019-01-02 19:55:26.982 CST [common/tools/configtxgen] doOutputBlock -> INFO 004 Generating genesis block
+2019-01-02 19:55:26.983 CST [common/tools/configtxgen] doOutputBlock -> INFO 005 Writing genesis block
+[root@localhost singlepeer]# ./bin/configtxgen -profile OneOrgsChannel -outputCreateChannelTx ./channel-artifacts/mychannel.tx -channelID mychannel
+2019-01-02 19:55:42.058 CST [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2019-01-02 19:55:42.093 CST [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 002 Generating new channel configtx
+2019-01-02 19:55:42.094 CST [msp] getMspConfig -> INFO 003 Loading NodeOUs
+2019-01-02 19:55:42.095 CST [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 004 Writing new channel tx
+[root@localhost singlepeer]# yum -y install apt-transinstall apt-transport-https ca-certificates curl software-properties-common
+已加载插件：fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirrors.cn99.com
+ * extras: mirrors.cn99.com
+ * updates: mirrors.cn99.com
+没有可用软件包 apt-transinstall。
+没有可用软件包 apt-transport-https。
+没有可用软件包 software-properties-common。
+正在解决依赖关系
+--> 正在检查事务
+---> 软件包 ca-certificates.noarch.0.2015.2.6-73.el7 将被 升级
+---> 软件包 ca-certificates.noarch.0.2018.2.22-70.0.el7_5 将被 更新
+--> 正在处理依赖关系 p11-kit-trust >= 0.23.5，它被软件包 ca-certificates-2018.2.22-70.0.el7_5.noarch 需要
+--> 正在处理依赖关系 p11-kit >= 0.23.5，它被软件包 ca-certificates-2018.2.22-70.0.el7_5.noarch 需要
+---> 软件包 curl.x86_64.0.7.29.0-35.el7.centos 将被 升级
+---> 软件包 curl.x86_64.0.7.29.0-51.el7 将被 更新
+--> 正在处理依赖关系 libcurl = 7.29.0-51.el7，它被软件包 curl-7.29.0-51.el7.x86_64 需要
+--> 正在检查事务
+---> 软件包 libcurl.x86_64.0.7.29.0-35.el7.centos 将被 升级
+---> 软件包 libcurl.x86_64.0.7.29.0-51.el7 将被 更新
+--> 正在处理依赖关系 nss-pem(x86-64) >= 1.0.3-5，它被软件包 libcurl-7.29.0-51.el7.x86_64 需要
+--> 正在处理依赖关系 libnss3.so(NSS_3.34)(64bit)，它被软件包 libcurl-7.29.0-51.el7.x86_64 需要
+---> 软件包 p11-kit.x86_64.0.0.20.7-3.el7 将被 升级
+---> 软件包 p11-kit.x86_64.0.0.23.5-3.el7 将被 更新
+---> 软件包 p11-kit-trust.x86_64.0.0.20.7-3.el7 将被 升级
+---> 软件包 p11-kit-trust.x86_64.0.0.23.5-3.el7 将被 更新
+--> 正在检查事务
+---> 软件包 nss.x86_64.0.3.21.0-17.el7 将被 升级
+--> 正在处理依赖关系 nss = 3.21.0-17.el7，它被软件包 nss-sysinit-3.21.0-17.el7.x86_64 需要
+--> 正在处理依赖关系 nss(x86-64) = 3.21.0-17.el7，它被软件包 nss-tools-3.21.0-17.el7.x86_64 需要
+---> 软件包 nss.x86_64.0.3.36.0-7.el7_5 将被 更新
+--> 正在处理依赖关系 nss-util >= 3.36.0-1，它被软件包 nss-3.36.0-7.el7_5.x86_64 需要
+--> 正在处理依赖关系 nss-softokn(x86-64) >= 3.36.0-1，它被软件包 nss-3.36.0-7.el7_5.x86_64 需要
+--> 正在处理依赖关系 nspr >= 4.19.0，它被软件包 nss-3.36.0-7.el7_5.x86_64 需要
+--> 正在处理依赖关系 libnssutil3.so(NSSUTIL_3.31)(64bit)，它被软件包 nss-3.36.0-7.el7_5.x86_64 需要
+--> 正在处理依赖关系 libnssutil3.so(NSSUTIL_3.24)(64bit)，它被软件包 nss-3.36.0-7.el7_5.x86_64 需要
+---> 软件包 nss-pem.x86_64.0.1.0.3-5.el7 将被 安装
+--> 正在检查事务
+---> 软件包 nspr.x86_64.0.4.11.0-1.el7_2 将被 升级
+---> 软件包 nspr.x86_64.0.4.19.0-1.el7_5 将被 更新
+---> 软件包 nss-softokn.x86_64.0.3.16.2.3-14.4.el7 将被 升级
+---> 软件包 nss-softokn.x86_64.0.3.36.0-5.el7_5 将被 更新
+--> 正在处理依赖关系 nss-softokn-freebl(x86-64) >= 3.36.0-5.el7_5，它被软件包 nss-softokn-3.36.0-5.el7_5.x86_64 需要
+---> 软件包 nss-sysinit.x86_64.0.3.21.0-17.el7 将被 升级
+---> 软件包 nss-sysinit.x86_64.0.3.36.0-7.el7_5 将被 更新
+---> 软件包 nss-tools.x86_64.0.3.21.0-17.el7 将被 升级
+---> 软件包 nss-tools.x86_64.0.3.36.0-7.el7_5 将被 更新
+---> 软件包 nss-util.x86_64.0.3.21.0-2.2.el7_2 将被 升级
+---> 软件包 nss-util.x86_64.0.3.36.0-1.el7_5 将被 更新
+--> 正在检查事务
+---> 软件包 nss-softokn-freebl.x86_64.0.3.16.2.3-14.4.el7 将被 升级
+---> 软件包 nss-softokn-freebl.x86_64.0.3.36.0-5.el7_5 将被 更新
+--> 解决依赖关系完成
+
+依赖关系解决
+
+=======================================================================================
+ Package                   架构          版本                        源           大小
+=======================================================================================
+正在更新:
+ ca-certificates           noarch        2018.2.22-70.0.el7_5        base        392 k
+ curl                      x86_64        7.29.0-51.el7               base        269 k
+为依赖而安装:
+ nss-pem                   x86_64        1.0.3-5.el7                 base         74 k
+为依赖而更新:
+ libcurl                   x86_64        7.29.0-51.el7               base        221 k
+ nspr                      x86_64        4.19.0-1.el7_5              base        127 k
+ nss                       x86_64        3.36.0-7.el7_5              base        835 k
+ nss-softokn               x86_64        3.36.0-5.el7_5              base        315 k
+ nss-softokn-freebl        x86_64        3.36.0-5.el7_5              base        222 k
+ nss-sysinit               x86_64        3.36.0-7.el7_5              base         62 k
+ nss-tools                 x86_64        3.36.0-7.el7_5              base        515 k
+ nss-util                  x86_64        3.36.0-1.el7_5              base         78 k
+ p11-kit                   x86_64        0.23.5-3.el7                base        252 k
+ p11-kit-trust             x86_64        0.23.5-3.el7                base        129 k
+
+事务概要
+=======================================================================================
+安装           (  1 依赖软件包)
+升级  2 软件包 (+10 依赖软件包)
+
+总计：3.4 M
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  正在更新    : nspr-4.19.0-1.el7_5.x86_64                                        1/25 
+  正在更新    : nss-util-3.36.0-1.el7_5.x86_64                                    2/25 
+  正在更新    : nss-softokn-freebl-3.36.0-5.el7_5.x86_64                          3/25 
+  正在更新    : nss-softokn-3.36.0-5.el7_5.x86_64                                 4/25 
+  正在安装    : nss-pem-1.0.3-5.el7.x86_64                                        5/25 
+  正在更新    : nss-sysinit-3.36.0-7.el7_5.x86_64                                 6/25 
+  正在更新    : nss-3.36.0-7.el7_5.x86_64                                         7/25 
+  正在更新    : p11-kit-0.23.5-3.el7.x86_64                                       8/25 
+  正在更新    : p11-kit-trust-0.23.5-3.el7.x86_64                                 9/25 
+  正在更新    : libcurl-7.29.0-51.el7.x86_64                                     10/25 
+  正在更新    : curl-7.29.0-51.el7.x86_64                                        11/25 
+  正在更新    : ca-certificates-2018.2.22-70.0.el7_5.noarch                      12/25 
+  正在更新    : nss-tools-3.36.0-7.el7_5.x86_64                                  13/25 
+  清理        : nss-tools-3.21.0-17.el7.x86_64                                   14/25 
+  清理        : ca-certificates-2015.2.6-73.el7.noarch                           15/25 
+  清理        : curl-7.29.0-35.el7.centos.x86_64                                 16/25 
+  清理        : libcurl-7.29.0-35.el7.centos.x86_64                              17/25 
+  清理        : nss-sysinit-3.21.0-17.el7.x86_64                                 18/25 
+  清理        : nss-3.21.0-17.el7.x86_64                                         19/25 
+  清理        : nss-softokn-3.16.2.3-14.4.el7.x86_64                             20/25 
+  清理        : p11-kit-trust-0.20.7-3.el7.x86_64                                21/25 
+  清理        : nss-util-3.21.0-2.2.el7_2.x86_64                                 22/25 
+  清理        : nspr-4.11.0-1.el7_2.x86_64                                       23/25 
+  清理        : nss-softokn-freebl-3.16.2.3-14.4.el7.x86_64                      24/25 
+  清理        : p11-kit-0.20.7-3.el7.x86_64                                      25/25 
+  验证中      : p11-kit-0.23.5-3.el7.x86_64                                       1/25 
+  验证中      : libcurl-7.29.0-51.el7.x86_64                                      2/25 
+  验证中      : nss-3.36.0-7.el7_5.x86_64                                         3/25 
+  验证中      : nss-util-3.36.0-1.el7_5.x86_64                                    4/25 
+  验证中      : nss-pem-1.0.3-5.el7.x86_64                                        5/25 
+  验证中      : nss-tools-3.36.0-7.el7_5.x86_64                                   6/25 
+  验证中      : p11-kit-trust-0.23.5-3.el7.x86_64                                 7/25 
+  验证中      : ca-certificates-2018.2.22-70.0.el7_5.noarch                       8/25 
+  验证中      : nss-sysinit-3.36.0-7.el7_5.x86_64                                 9/25 
+  验证中      : nss-softokn-freebl-3.36.0-5.el7_5.x86_64                         10/25 
+  验证中      : nspr-4.19.0-1.el7_5.x86_64                                       11/25 
+  验证中      : curl-7.29.0-51.el7.x86_64                                        12/25 
+  验证中      : nss-softokn-3.36.0-5.el7_5.x86_64                                13/25 
+  验证中      : nss-tools-3.21.0-17.el7.x86_64                                   14/25 
+  验证中      : nss-softokn-3.16.2.3-14.4.el7.x86_64                             15/25 
+  验证中      : p11-kit-trust-0.20.7-3.el7.x86_64                                16/25 
+  验证中      : nss-sysinit-3.21.0-17.el7.x86_64                                 17/25 
+  验证中      : p11-kit-0.20.7-3.el7.x86_64                                      18/25 
+  验证中      : nss-3.21.0-17.el7.x86_64                                         19/25 
+  验证中      : nss-util-3.21.0-2.2.el7_2.x86_64                                 20/25 
+  验证中      : nss-softokn-freebl-3.16.2.3-14.4.el7.x86_64                      21/25 
+  验证中      : libcurl-7.29.0-35.el7.centos.x86_64                              22/25 
+  验证中      : curl-7.29.0-35.el7.centos.x86_64                                 23/25 
+  验证中      : nspr-4.11.0-1.el7_2.x86_64                                       24/25 
+  验证中      : ca-certificates-2015.2.6-73.el7.noarch                           25/25 
+
+作为依赖被安装:
+  nss-pem.x86_64 0:1.0.3-5.el7                                                         
+
+更新完毕:
+  ca-certificates.noarch 0:2018.2.22-70.0.el7_5       curl.x86_64 0:7.29.0-51.el7      
+
+作为依赖被升级:
+  libcurl.x86_64 0:7.29.0-51.el7                nspr.x86_64 0:4.19.0-1.el7_5          
+  nss.x86_64 0:3.36.0-7.el7_5                   nss-softokn.x86_64 0:3.36.0-5.el7_5   
+  nss-softokn-freebl.x86_64 0:3.36.0-5.el7_5    nss-sysinit.x86_64 0:3.36.0-7.el7_5   
+  nss-tools.x86_64 0:3.36.0-7.el7_5             nss-util.x86_64 0:3.36.0-1.el7_5      
+  p11-kit.x86_64 0:0.23.5-3.el7                 p11-kit-trust.x86_64 0:0.23.5-3.el7   
+
+完毕！
+[root@localhost singlepeer]# curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+sudo：apt-key：找不到命令
+(23) Failed writing body
+[root@localhost singlepeer]# curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/centos/gpg | sudo apt-key add -
+sudo：apt-key：找不到命令
+(23) Failed writing body
+[root@localhost singlepeer]# curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/CentOS/gpg | sudo apt-key add -
+sudo：apt-key：找不到命令
+curl: (22) The requested URL returned error: 404 Not Found
+[root@localhost singlepeer]# yum -y install apt-transinstall apt-transport-https ca-certificates curl software-properties-common^C
+[root@localhost singlepeer]# sudo yum install docker
+已加载插件：fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirrors.cn99.com
+ * extras: mirrors.cn99.com
+ * updates: mirrors.cn99.com
+正在解决依赖关系
+--> 正在检查事务
+---> 软件包 docker.x86_64.2.1.13.1-88.git07f3374.el7.centos 将被 安装
+--> 正在处理依赖关系 docker-common = 2:1.13.1-88.git07f3374.el7.centos，它被软件包 2:docker-1.13.1-88.git07f3374.el7.centos.x86_64 需要
+--> 正在处理依赖关系 docker-client = 2:1.13.1-88.git07f3374.el7.centos，它被软件包 2:docker-1.13.1-88.git07f3374.el7.centos.x86_64 需要
+--> 正在处理依赖关系 subscription-manager-rhsm-certificates，它被软件包 2:docker-1.13.1-88.git07f3374.el7.centos.x86_64 需要
+--> 正在检查事务
+---> 软件包 docker-client.x86_64.2.1.13.1-88.git07f3374.el7.centos 将被 安装
+---> 软件包 docker-common.x86_64.2.1.13.1-88.git07f3374.el7.centos 将被 安装
+--> 正在处理依赖关系 skopeo-containers >= 1:0.1.26-2，它被软件包 2:docker-common-1.13.1-88.git07f3374.el7.centos.x86_64 需要
+--> 正在处理依赖关系 oci-umount >= 2:2.3.3-3，它被软件包 2:docker-common-1.13.1-88.git07f3374.el7.centos.x86_64 需要
+--> 正在处理依赖关系 oci-systemd-hook >= 1:0.1.4-9，它被软件包 2:docker-common-1.13.1-88.git07f3374.el7.centos.x86_64 需要
+--> 正在处理依赖关系 oci-register-machine >= 1:0-5.13，它被软件包 2:docker-common-1.13.1-88.git07f3374.el7.centos.x86_64 需要
+--> 正在处理依赖关系 container-storage-setup >= 0.9.0-1，它被软件包 2:docker-common-1.13.1-88.git07f3374.el7.centos.x86_64 需要
+--> 正在处理依赖关系 container-selinux >= 2:2.51-1，它被软件包 2:docker-common-1.13.1-88.git07f3374.el7.centos.x86_64 需要
+--> 正在处理依赖关系 atomic-registries，它被软件包 2:docker-common-1.13.1-88.git07f3374.el7.centos.x86_64 需要
+---> 软件包 subscription-manager-rhsm-certificates.x86_64.0.1.21.10-3.el7.centos 将被 安装
+--> 正在检查事务
+---> 软件包 atomic-registries.x86_64.1.1.22.1-26.gitb507039.el7.centos 将被 安装
+--> 正在处理依赖关系 python-yaml，它被软件包 1:atomic-registries-1.22.1-26.gitb507039.el7.centos.x86_64 需要
+--> 正在处理依赖关系 python-pytoml，它被软件包 1:atomic-registries-1.22.1-26.gitb507039.el7.centos.x86_64 需要
+---> 软件包 container-selinux.noarch.2.2.74-1.el7 将被 安装
+--> 正在处理依赖关系 selinux-policy-targeted >= 3.13.1-216.el7，它被软件包 2:container-selinux-2.74-1.el7.noarch 需要
+--> 正在处理依赖关系 selinux-policy-base >= 3.13.1-216.el7，它被软件包 2:container-selinux-2.74-1.el7.noarch 需要
+--> 正在处理依赖关系 selinux-policy >= 3.13.1-216.el7，它被软件包 2:container-selinux-2.74-1.el7.noarch 需要
+--> 正在处理依赖关系 policycoreutils >= 2.5-11，它被软件包 2:container-selinux-2.74-1.el7.noarch 需要
+---> 软件包 container-storage-setup.noarch.0.0.11.0-2.git5eaf76c.el7 将被 安装
+---> 软件包 containers-common.x86_64.1.0.1.31-7.gitb0b750d.el7.centos 将被 安装
+---> 软件包 oci-register-machine.x86_64.1.0-6.git2b44233.el7 将被 安装
+---> 软件包 oci-systemd-hook.x86_64.1.0.1.18-2.git3efe246.el7 将被 安装
+---> 软件包 oci-umount.x86_64.2.2.3.4-2.git87f9237.el7 将被 安装
+--> 正在检查事务
+---> 软件包 PyYAML.x86_64.0.3.10-11.el7 将被 安装
+--> 正在处理依赖关系 libyaml-0.so.2()(64bit)，它被软件包 PyYAML-3.10-11.el7.x86_64 需要
+---> 软件包 policycoreutils.x86_64.0.2.5-8.el7 将被 升级
+--> 正在处理依赖关系 policycoreutils = 2.5-8.el7，它被软件包 policycoreutils-python-2.5-8.el7.x86_64 需要
+---> 软件包 policycoreutils.x86_64.0.2.5-29.el7 将被 更新
+--> 正在处理依赖关系 libsepol >= 2.5-10，它被软件包 policycoreutils-2.5-29.el7.x86_64 需要
+--> 正在处理依赖关系 libsemanage >= 2.5-14，它被软件包 policycoreutils-2.5-29.el7.x86_64 需要
+--> 正在处理依赖关系 libselinux-utils >= 2.5-14，它被软件包 policycoreutils-2.5-29.el7.x86_64 需要
+---> 软件包 python-pytoml.noarch.0.0.1.14-1.git7dea353.el7 将被 安装
+---> 软件包 selinux-policy.noarch.0.3.13.1-102.el7 将被 升级
+---> 软件包 selinux-policy.noarch.0.3.13.1-229.el7_6.6 将被 更新
+---> 软件包 selinux-policy-targeted.noarch.0.3.13.1-102.el7 将被 升级
+---> 软件包 selinux-policy-targeted.noarch.0.3.13.1-229.el7_6.6 将被 更新
+--> 正在检查事务
+---> 软件包 libselinux-utils.x86_64.0.2.5-6.el7 将被 升级
+---> 软件包 libselinux-utils.x86_64.0.2.5-14.1.el7 将被 更新
+--> 正在处理依赖关系 libselinux(x86-64) = 2.5-14.1.el7，它被软件包 libselinux-utils-2.5-14.1.el7.x86_64 需要
+---> 软件包 libsemanage.x86_64.0.2.5-4.el7 将被 升级
+--> 正在处理依赖关系 libsemanage = 2.5-4.el7，它被软件包 libsemanage-python-2.5-4.el7.x86_64 需要
+---> 软件包 libsemanage.x86_64.0.2.5-14.el7 将被 更新
+---> 软件包 libsepol.x86_64.0.2.5-6.el7 将被 升级
+---> 软件包 libsepol.x86_64.0.2.5-10.el7 将被 更新
+---> 软件包 libyaml.x86_64.0.0.1.4-11.el7_0 将被 安装
+---> 软件包 policycoreutils-python.x86_64.0.2.5-8.el7 将被 升级
+---> 软件包 policycoreutils-python.x86_64.0.2.5-29.el7 将被 更新
+--> 正在处理依赖关系 setools-libs >= 3.3.8-4，它被软件包 policycoreutils-python-2.5-29.el7.x86_64 需要
+--> 正在检查事务
+---> 软件包 libselinux.x86_64.0.2.5-6.el7 将被 升级
+--> 正在处理依赖关系 libselinux(x86-64) = 2.5-6.el7，它被软件包 libselinux-python-2.5-6.el7.x86_64 需要
+---> 软件包 libselinux.x86_64.0.2.5-14.1.el7 将被 更新
+---> 软件包 libsemanage-python.x86_64.0.2.5-4.el7 将被 升级
+---> 软件包 libsemanage-python.x86_64.0.2.5-14.el7 将被 更新
+---> 软件包 setools-libs.x86_64.0.3.3.8-1.1.el7 将被 升级
+---> 软件包 setools-libs.x86_64.0.3.3.8-4.el7 将被 更新
+--> 正在检查事务
+---> 软件包 libselinux-python.x86_64.0.2.5-6.el7 将被 升级
+---> 软件包 libselinux-python.x86_64.0.2.5-14.1.el7 将被 更新
+--> 解决依赖关系完成
+
+依赖关系解决
+
+=======================================================================================
+ Package                        架构   版本                              源       大小
+=======================================================================================
+正在安装:
+ docker                         x86_64 2:1.13.1-88.git07f3374.el7.centos extras   17 M
+为依赖而安装:
+ PyYAML                         x86_64 3.10-11.el7                       base    153 k
+ atomic-registries              x86_64 1:1.22.1-26.gitb507039.el7.centos extras   35 k
+ container-selinux              noarch 2:2.74-1.el7                      extras   38 k
+ container-storage-setup        noarch 0.11.0-2.git5eaf76c.el7           extras   35 k
+ containers-common              x86_64 1:0.1.31-7.gitb0b750d.el7.centos  extras   18 k
+ docker-client                  x86_64 2:1.13.1-88.git07f3374.el7.centos extras  3.8 M
+ docker-common                  x86_64 2:1.13.1-88.git07f3374.el7.centos extras   95 k
+ libyaml                        x86_64 0.1.4-11.el7_0                    base     55 k
+ oci-register-machine           x86_64 1:0-6.git2b44233.el7              extras  1.1 M
+ oci-systemd-hook               x86_64 1:0.1.18-2.git3efe246.el7         extras   34 k
+ oci-umount                     x86_64 2:2.3.4-2.git87f9237.el7          extras   32 k
+ python-pytoml                  noarch 0.1.14-1.git7dea353.el7           extras   18 k
+ subscription-manager-rhsm-certificates
+                                x86_64 1.21.10-3.el7.centos              updates 207 k
+为依赖而更新:
+ libselinux                     x86_64 2.5-14.1.el7                      base    162 k
+ libselinux-python              x86_64 2.5-14.1.el7                      base    235 k
+ libselinux-utils               x86_64 2.5-14.1.el7                      base    151 k
+ libsemanage                    x86_64 2.5-14.el7                        base    151 k
+ libsemanage-python             x86_64 2.5-14.el7                        base    113 k
+ libsepol                       x86_64 2.5-10.el7                        base    297 k
+ policycoreutils                x86_64 2.5-29.el7                        base    916 k
+ policycoreutils-python         x86_64 2.5-29.el7                        base    456 k
+ selinux-policy                 noarch 3.13.1-229.el7_6.6                updates 483 k
+ selinux-policy-targeted        noarch 3.13.1-229.el7_6.6                updates 6.9 M
+ setools-libs                   x86_64 3.3.8-4.el7                       base    620 k
+
+事务概要
+=======================================================================================
+安装  1 软件包 (+13 依赖软件包)
+升级           ( 11 依赖软件包)
+
+总计：33 M
+总下载量：23 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/14): atomic-registries-1.22.1-26.gitb507039.el7.centos.x86_6 |  35 kB  00:00:00     
+(2/14): container-selinux-2.74-1.el7.noarch.rpm                 |  38 kB  00:00:00     
+(3/14): container-storage-setup-0.11.0-2.git5eaf76c.el7.noarch. |  35 kB  00:00:00     
+(4/14): containers-common-0.1.31-7.gitb0b750d.el7.centos.x86_64 |  18 kB  00:00:00     
+(5/14): PyYAML-3.10-11.el7.x86_64.rpm                           | 153 kB  00:00:00     
+(6/14): docker-client-1.13.1-88.git07f3374.el7.centos.x86_64.rp | 3.8 MB  00:00:01     
+(7/14): docker-common-1.13.1-88.git07f3374.el7.centos.x86_64.rp |  95 kB  00:00:00     
+(8/14): libyaml-0.1.4-11.el7_0.x86_64.rpm                       |  55 kB  00:00:00     
+(9/14): oci-register-machine-0-6.git2b44233.el7.x86_64.rpm      | 1.1 MB  00:00:00     
+(10/14): oci-systemd-hook-0.1.18-2.git3efe246.el7.x86_64.rpm    |  34 kB  00:00:00     
+(11/14): oci-umount-2.3.4-2.git87f9237.el7.x86_64.rpm           |  32 kB  00:00:00     
+(12/14): python-pytoml-0.1.14-1.git7dea353.el7.noarch.rpm       |  18 kB  00:00:00     
+(13/14): subscription-manager-rhsm-certificates-1.21.10-3.el7.c | 207 kB  00:00:00     
+(14/14): docker-1.13.1-88.git07f3374.el7.centos.x86_64.rpm      |  17 MB  00:00:03     
+---------------------------------------------------------------------------------------
+总计                                                      5.8 MB/s |  23 MB  00:03     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  正在更新    : libsepol-2.5-10.el7.x86_64                                        1/36 
+  正在更新    : libselinux-2.5-14.1.el7.x86_64                                    2/36 
+  正在更新    : libsemanage-2.5-14.el7.x86_64                                     3/36 
+  正在更新    : libselinux-utils-2.5-14.1.el7.x86_64                              4/36 
+  正在更新    : policycoreutils-2.5-29.el7.x86_64                                 5/36 
+  正在更新    : selinux-policy-3.13.1-229.el7_6.6.noarch                          6/36 
+  正在更新    : selinux-policy-targeted-3.13.1-229.el7_6.6.noarch                 7/36 
+  正在更新    : libsemanage-python-2.5-14.el7.x86_64                              8/36 
+  正在安装    : 1:oci-systemd-hook-0.1.18-2.git3efe246.el7.x86_64                 9/36 
+  正在更新    : setools-libs-3.3.8-4.el7.x86_64                                  10/36 
+  正在更新    : libselinux-python-2.5-14.1.el7.x86_64                            11/36 
+  正在更新    : policycoreutils-python-2.5-29.el7.x86_64                         12/36 
+  正在安装    : 2:container-selinux-2.74-1.el7.noarch                            13/36 
+  正在安装    : 1:oci-register-machine-0-6.git2b44233.el7.x86_64                 14/36 
+  正在安装    : libyaml-0.1.4-11.el7_0.x86_64                                    15/36 
+  正在安装    : PyYAML-3.10-11.el7.x86_64                                        16/36 
+  正在安装    : python-pytoml-0.1.14-1.git7dea353.el7.noarch                     17/36 
+  正在安装    : 1:atomic-registries-1.22.1-26.gitb507039.el7.centos.x86_64       18/36 
+  正在安装    : 2:oci-umount-2.3.4-2.git87f9237.el7.x86_64                       19/36 
+  正在安装    : subscription-manager-rhsm-certificates-1.21.10-3.el7.centos.x8   20/36 
+  正在安装    : 1:containers-common-0.1.31-7.gitb0b750d.el7.centos.x86_64        21/36 
+  正在安装    : container-storage-setup-0.11.0-2.git5eaf76c.el7.noarch           22/36 
+  正在安装    : 2:docker-common-1.13.1-88.git07f3374.el7.centos.x86_64           23/36 
+  正在安装    : 2:docker-client-1.13.1-88.git07f3374.el7.centos.x86_64           24/36 
+  正在安装    : 2:docker-1.13.1-88.git07f3374.el7.centos.x86_64                  25/36 
+  清理        : selinux-policy-targeted-3.13.1-102.el7.noarch                    26/36 
+  清理        : policycoreutils-python-2.5-8.el7.x86_64                          27/36 
+  清理        : selinux-policy-3.13.1-102.el7.noarch                             28/36 
+  清理        : policycoreutils-2.5-8.el7.x86_64                                 29/36 
+  清理        : libselinux-utils-2.5-6.el7.x86_64                                30/36 
+  清理        : setools-libs-3.3.8-1.1.el7.x86_64                                31/36 
+  清理        : libselinux-python-2.5-6.el7.x86_64                               32/36 
+  清理        : libsemanage-python-2.5-4.el7.x86_64                              33/36 
+  清理        : libsemanage-2.5-4.el7.x86_64                                     34/36 
+  清理        : libselinux-2.5-6.el7.x86_64                                      35/36 
+  清理        : libsepol-2.5-6.el7.x86_64                                        36/36 
+  验证中      : selinux-policy-3.13.1-229.el7_6.6.noarch                          1/36 
+  验证中      : 1:oci-systemd-hook-0.1.18-2.git3efe246.el7.x86_64                 2/36 
+  验证中      : 2:docker-client-1.13.1-88.git07f3374.el7.centos.x86_64            3/36 
+  验证中      : container-storage-setup-0.11.0-2.git5eaf76c.el7.noarch            4/36 
+  验证中      : 1:containers-common-0.1.31-7.gitb0b750d.el7.centos.x86_64         5/36 
+  验证中      : 2:container-selinux-2.74-1.el7.noarch                             6/36 
+  验证中      : subscription-manager-rhsm-certificates-1.21.10-3.el7.centos.x8    7/36 
+  验证中      : 2:oci-umount-2.3.4-2.git87f9237.el7.x86_64                        8/36 
+  验证中      : 1:atomic-registries-1.22.1-26.gitb507039.el7.centos.x86_64        9/36 
+  验证中      : 2:docker-common-1.13.1-88.git07f3374.el7.centos.x86_64           10/36 
+  验证中      : python-pytoml-0.1.14-1.git7dea353.el7.noarch                     11/36 
+  验证中      : setools-libs-3.3.8-4.el7.x86_64                                  12/36 
+  验证中      : policycoreutils-2.5-29.el7.x86_64                                13/36 
+  验证中      : libyaml-0.1.4-11.el7_0.x86_64                                    14/36 
+  验证中      : 2:docker-1.13.1-88.git07f3374.el7.centos.x86_64                  15/36 
+  验证中      : libsemanage-python-2.5-14.el7.x86_64                             16/36 
+  验证中      : libsemanage-2.5-14.el7.x86_64                                    17/36 
+  验证中      : 1:oci-register-machine-0-6.git2b44233.el7.x86_64                 18/36 
+  验证中      : libsepol-2.5-10.el7.x86_64                                       19/36 
+  验证中      : libselinux-python-2.5-14.1.el7.x86_64                            20/36 
+  验证中      : selinux-policy-targeted-3.13.1-229.el7_6.6.noarch                21/36 
+  验证中      : libselinux-utils-2.5-14.1.el7.x86_64                             22/36 
+  验证中      : policycoreutils-python-2.5-29.el7.x86_64                         23/36 
+  验证中      : PyYAML-3.10-11.el7.x86_64                                        24/36 
+  验证中      : libselinux-2.5-14.1.el7.x86_64                                   25/36 
+  验证中      : libsepol-2.5-6.el7.x86_64                                        26/36 
+  验证中      : policycoreutils-2.5-8.el7.x86_64                                 27/36 
+  验证中      : libselinux-python-2.5-6.el7.x86_64                               28/36 
+  验证中      : libsemanage-python-2.5-4.el7.x86_64                              29/36 
+  验证中      : policycoreutils-python-2.5-8.el7.x86_64                          30/36 
+  验证中      : libselinux-utils-2.5-6.el7.x86_64                                31/36 
+  验证中      : selinux-policy-3.13.1-102.el7.noarch                             32/36 
+  验证中      : libselinux-2.5-6.el7.x86_64                                      33/36 
+  验证中      : selinux-policy-targeted-3.13.1-102.el7.noarch                    34/36 
+  验证中      : libsemanage-2.5-4.el7.x86_64                                     35/36 
+  验证中      : setools-libs-3.3.8-1.1.el7.x86_64                                36/36 
+
+已安装:
+  docker.x86_64 2:1.13.1-88.git07f3374.el7.centos                                      
+
+作为依赖被安装:
+  PyYAML.x86_64 0:3.10-11.el7                                                          
+  atomic-registries.x86_64 1:1.22.1-26.gitb507039.el7.centos                           
+  container-selinux.noarch 2:2.74-1.el7                                                
+  container-storage-setup.noarch 0:0.11.0-2.git5eaf76c.el7                             
+  containers-common.x86_64 1:0.1.31-7.gitb0b750d.el7.centos                            
+  docker-client.x86_64 2:1.13.1-88.git07f3374.el7.centos                               
+  docker-common.x86_64 2:1.13.1-88.git07f3374.el7.centos                               
+  libyaml.x86_64 0:0.1.4-11.el7_0                                                      
+  oci-register-machine.x86_64 1:0-6.git2b44233.el7                                     
+  oci-systemd-hook.x86_64 1:0.1.18-2.git3efe246.el7                                    
+  oci-umount.x86_64 2:2.3.4-2.git87f9237.el7                                           
+  python-pytoml.noarch 0:0.1.14-1.git7dea353.el7                                       
+  subscription-manager-rhsm-certificates.x86_64 0:1.21.10-3.el7.centos                 
+
+作为依赖被升级:
+  libselinux.x86_64 0:2.5-14.1.el7                                                     
+  libselinux-python.x86_64 0:2.5-14.1.el7                                              
+  libselinux-utils.x86_64 0:2.5-14.1.el7                                               
+  libsemanage.x86_64 0:2.5-14.el7                                                      
+  libsemanage-python.x86_64 0:2.5-14.el7                                               
+  libsepol.x86_64 0:2.5-10.el7                                                         
+  policycoreutils.x86_64 0:2.5-29.el7                                                  
+  policycoreutils-python.x86_64 0:2.5-29.el7                                           
+  selinux-policy.noarch 0:3.13.1-229.el7_6.6                                           
+  selinux-policy-targeted.noarch 0:3.13.1-229.el7_6.6                                  
+  setools-libs.x86_64 0:3.3.8-4.el7                                                    
+
+完毕！
+[root@localhost singlepeer]# docker version
+Client:
+ Version:         1.13.1
+ API version:     1.26
+ Package version: 
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+[root@localhost singlepeer]# 
+[root@localhost singlepeer]# 
+[root@localhost singlepeer]# curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-uname -s-uname -m -o /usr/local/bin/docker-compose
+curl: option -s-uname: is unknown
+curl: try 'curl --help' or 'curl --manual' for more information
+[root@localhost singlepeer]# sudo yum install python-pip
+已加载插件：fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirrors.cn99.com
+ * extras: mirrors.cn99.com
+ * updates: mirrors.cn99.com
+没有可用软件包 python-pip。
+错误：无须任何处理
+[root@localhost singlepeer]# pip
+bash: pip: 未找到命令...
+[root@localhost singlepeer]# sudo yum -y install epel-release
+已加载插件：fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirrors.cn99.com
+ * extras: mirrors.cn99.com
+ * updates: mirrors.cn99.com
+正在解决依赖关系
+--> 正在检查事务
+---> 软件包 epel-release.noarch.0.7-11 将被 安装
+--> 解决依赖关系完成
+
+依赖关系解决
+
+=======================================================================================
+ Package                  架构               版本             源                  大小
+=======================================================================================
+正在安装:
+ epel-release             noarch             7-11             extras              15 k
+
+事务概要
+=======================================================================================
+安装  1 软件包
+
+总下载量：15 k
+安装大小：24 k
+Downloading packages:
+epel-release-7-11.noarch.rpm                                    |  15 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  正在安装    : epel-release-7-11.noarch                                           1/1 
+  验证中      : epel-release-7-11.noarch                                           1/1 
+
+已安装:
+  epel-release.noarch 0:7-11                                                           
+
+完毕！
+[root@localhost singlepeer]# sudo pip install docker-compose
+sudo：pip：找不到命令
+[root@localhost singlepeer]# sudo yum -y install python-pip
+已加载插件：fastestmirror, langpacks
+epel/x86_64/metalink                                            | 8.0 kB  00:00:00     
+epel                                                            | 3.2 kB  00:00:00     
+(1/3): epel/x86_64/group_gz                                     |  88 kB  00:00:00     
+(2/3): epel/x86_64/updateinfo                                   | 939 kB  00:00:03     
+(3/3): epel/x86_64/primary                                      | 3.6 MB  00:00:55     
+Loading mirror speeds from cached hostfile
+ * base: mirrors.cn99.com
+ * epel: fedora.cs.nctu.edu.tw
+ * extras: mirrors.cn99.com
+ * updates: mirrors.cn99.com
+epel                                                                       12782/12782
+正在解决依赖关系
+--> 正在检查事务
+---> 软件包 python2-pip.noarch.0.8.1.2-6.el7 将被 安装
+--> 解决依赖关系完成
+
+依赖关系解决
+
+=======================================================================================
+ Package                架构              版本                   源               大小
+=======================================================================================
+正在安装:
+ python2-pip            noarch            8.1.2-6.el7            epel            1.7 M
+
+事务概要
+=======================================================================================
+安装  1 软件包
+
+总下载量：1.7 M
+安装大小：7.2 M
+Downloading packages:
+警告：/var/cache/yum/x86_64/7/epel/packages/python2-pip-8.1.2-6.el7.noarch.rpm: 头V3 RSA/SHA256 Signature, 密钥 ID 352c64e5: NOKEY
+python2-pip-8.1.2-6.el7.noarch.rpm 的公钥尚未安装
+python2-pip-8.1.2-6.el7.noarch.rpm                              | 1.7 MB  00:00:01     
+从 file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 检索密钥
+导入 GPG key 0x352C64E5:
+ 用户ID     : "Fedora EPEL (7) <epel@fedoraproject.org>"
+ 指纹       : 91e9 7d7c 4a5e 96f1 7f3e 888f 6a2f aea2 352c 64e5
+ 软件包     : epel-release-7-11.noarch (@extras)
+ 来自       : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  正在安装    : python2-pip-8.1.2-6.el7.noarch                                     1/1 
+  验证中      : python2-pip-8.1.2-6.el7.noarch                                     1/1 
+
+已安装:
+  python2-pip.noarch 0:8.1.2-6.el7                                                     
+
+完毕！
+[root@localhost singlepeer]# pip install --upgrade pip
+Collecting pip
+  Downloading https://files.pythonhosted.org/packages/c2/d7/90f34cb0d83a6c5631cf71dfe64cc1054598c843a92b400e55675cc2ac37/pip-18.1-py2.py3-none-any.whl (1.3MB)
+    100% |████████████████████████████████| 1.3MB 14kB/s 
+Installing collected packages: pip
+  Found existing installation: pip 8.1.2
+    Uninstalling pip-8.1.2:
+      Successfully uninstalled pip-8.1.2
+Successfully installed pip-18.1
+[root@localhost singlepeer]# pip install docker-compose --ignore-installed requests
+Collecting docker-compose
+  Downloading https://files.pythonhosted.org/packages/1e/6c/bf9879305530c4b765ef4eb3be76202788ca1037aec74d2c0ec73191d467/docker_compose-1.23.2-py2.py3-none-any.whl (131kB)
+    100% |████████████████████████████████| 133kB 47kB/s 
+Collecting requests
+  Downloading https://files.pythonhosted.org/packages/7d/e3/20f3d364d6c8e5d2353c72a67778eb189176f08e873c9900e10c0287b84b/requests-2.21.0-py2.py3-none-any.whl (57kB)
+    100% |████████████████████████████████| 61kB 67kB/s 
+Collecting texttable<0.10,>=0.9.0 (from docker-compose)
+  Downloading https://files.pythonhosted.org/packages/02/e1/2565e6b842de7945af0555167d33acfc8a615584ef7abd30d1eae00a4d80/texttable-0.9.1.tar.gz
+Collecting backports.ssl-match-hostname>=3.5; python_version < "3.5" (from docker-compose)
+  Downloading https://files.pythonhosted.org/packages/76/21/2dc61178a2038a5cb35d14b61467c6ac632791ed05131dda72c20e7b9e23/backports.ssl_match_hostname-3.5.0.1.tar.gz
+Collecting ipaddress>=1.0.16; python_version < "3.3" (from docker-compose)
+  Downloading https://files.pythonhosted.org/packages/fc/d0/7fc3a811e011d4b388be48a0e381db8d990042df54aa4ef4599a31d39853/ipaddress-1.0.22-py2.py3-none-any.whl
+Collecting jsonschema<3,>=2.5.1 (from docker-compose)
+  Downloading https://files.pythonhosted.org/packages/77/de/47e35a97b2b05c2fadbec67d44cfcdcd09b8086951b331d82de90d2912da/jsonschema-2.6.0-py2.py3-none-any.whl
+Collecting cached-property<2,>=1.2.0 (from docker-compose)
+  Downloading https://files.pythonhosted.org/packages/3b/86/85c1be2e8db9e13ef9a350aecd6dea292bd612fa288c2f40d035bb750ded/cached_property-1.5.1-py2.py3-none-any.whl
+Collecting six<2,>=1.3.0 (from docker-compose)
+  Downloading https://files.pythonhosted.org/packages/73/fb/00a976f728d0d1fecfe898238ce23f502a721c0ac0ecfedb80e0d88c64e9/six-1.12.0-py2.py3-none-any.whl
+Collecting enum34<2,>=1.0.4; python_version < "3.4" (from docker-compose)
+  Downloading https://files.pythonhosted.org/packages/c5/db/e56e6b4bbac7c4a06de1c50de6fe1ef3810018ae11732a50f15f62c7d050/enum34-1.1.6-py2-none-any.whl
+Collecting websocket-client<1.0,>=0.32.0 (from docker-compose)
+  Downloading https://files.pythonhosted.org/packages/26/2d/f749a5c82f6192d77ed061a38e02001afcba55fe8477336d26a950ab17ce/websocket_client-0.54.0-py2.py3-none-any.whl (200kB)
+    100% |████████████████████████████████| 204kB 63kB/s 
+Collecting PyYAML<4,>=3.10 (from docker-compose)
+  Downloading https://files.pythonhosted.org/packages/9e/a3/1d13970c3f36777c583f136c136f804d70f500168edc1edea6daa7200769/PyYAML-3.13.tar.gz (270kB)
+    100% |████████████████████████████████| 276kB 100kB/s 
+Collecting dockerpty<0.5,>=0.4.1 (from docker-compose)
+  Downloading https://files.pythonhosted.org/packages/8d/ee/e9ecce4c32204a6738e0a5d5883d3413794d7498fe8b06f44becc028d3ba/dockerpty-0.4.1.tar.gz
+Collecting docopt<0.7,>=0.6.1 (from docker-compose)
+  Downloading https://files.pythonhosted.org/packages/a2/55/8f8cab2afd404cf578136ef2cc5dfb50baa1761b68c9da1fb1e4eed343c9/docopt-0.6.2.tar.gz
+Collecting docker<4.0,>=3.6.0 (from docker-compose)
+  Downloading https://files.pythonhosted.org/packages/e1/58/938fbc7acd98302ca4872f5eab8ab811498e342ab5aec0c1609f22e0aeda/docker-3.6.0-py2.py3-none-any.whl (131kB)
+    100% |████████████████████████████████| 133kB 87kB/s 
+Collecting chardet<3.1.0,>=3.0.2 (from requests)
+  Downloading https://files.pythonhosted.org/packages/bc/a9/01ffebfb562e4274b6487b4bb1ddec7ca55ec7510b22e4c51f14098443b8/chardet-3.0.4-py2.py3-none-any.whl (133kB)
+    100% |████████████████████████████████| 143kB 144kB/s 
+Collecting idna<2.9,>=2.5 (from requests)
+  Downloading https://files.pythonhosted.org/packages/14/2c/cd551d81dbe15200be1cf41cd03869a46fe7226e7450af7a6545bfc474c9/idna-2.8-py2.py3-none-any.whl (58kB)
+    100% |████████████████████████████████| 61kB 134kB/s 
+Collecting certifi>=2017.4.17 (from requests)
+  Downloading https://files.pythonhosted.org/packages/9f/e0/accfc1b56b57e9750eba272e24c4dddeac86852c2bebd1236674d7887e8a/certifi-2018.11.29-py2.py3-none-any.whl (154kB)
+    100% |████████████████████████████████| 163kB 109kB/s 
+Collecting urllib3<1.25,>=1.21.1 (from requests)
+  Downloading https://files.pythonhosted.org/packages/62/00/ee1d7de624db8ba7090d1226aebefab96a2c71cd5cfa7629d6ad3f61b79e/urllib3-1.24.1-py2.py3-none-any.whl (118kB)
+    100% |████████████████████████████████| 122kB 78kB/s 
+Collecting functools32; python_version == "2.7" (from jsonschema<3,>=2.5.1->docker-compose)
+  Downloading https://files.pythonhosted.org/packages/c5/60/6ac26ad05857c601308d8fb9e87fa36d0ebf889423f47c3502ef034365db/functools32-3.2.3-2.tar.gz
+Collecting docker-pycreds>=0.3.0 (from docker<4.0,>=3.6.0->docker-compose)
+  Downloading https://files.pythonhosted.org/packages/f5/e8/f6bd1eee09314e7e6dee49cbe2c5e22314ccdb38db16c9fc72d2fa80d054/docker_pycreds-0.4.0-py2.py3-none-any.whl
+docker-compose 1.23.2 has requirement requests!=2.11.0,!=2.12.2,!=2.18.0,<2.21,>=2.6.1, but you'll have requests 2.21.0 which is incompatible.
+Installing collected packages: chardet, idna, certifi, urllib3, requests, texttable, backports.ssl-match-hostname, ipaddress, functools32, jsonschema, cached-property, six, enum34, websocket-client, PyYAML, dockerpty, docopt, docker-pycreds, docker, docker-compose
+  Running setup.py install for texttable ... done
+  Running setup.py install for backports.ssl-match-hostname ... done
+  Running setup.py install for functools32 ... done
+  Running setup.py install for PyYAML ... done
+  Running setup.py install for dockerpty ... done
+  Running setup.py install for docopt ... done
+Successfully installed PyYAML-3.13 backports.ssl-match-hostname-3.5.0.1 cached-property-1.5.1 certifi-2018.11.29 chardet-3.0.4 docker-3.6.0 docker-compose-1.23.2 docker-pycreds-0.4.0 dockerpty-0.4.1 docopt-0.6.2 enum34-1.1.6 functools32-3.2.3.post2 idna-2.8 ipaddress-1.0.22 jsonschema-2.6.0 requests-2.21.0 six-1.12.0 texttable-0.9.1 urllib3-1.24.1 websocket-client-0.54.0
+[root@localhost singlepeer]# sudo docker-compose
+Define and run multi-container applications with Docker.
+
+Usage:
+  docker-compose [-f <arg>...] [options] [COMMAND] [ARGS...]
+  docker-compose -h|--help
+
+Options:
+  -f, --file FILE             Specify an alternate compose file
+                              (default: docker-compose.yml)
+  -p, --project-name NAME     Specify an alternate project name
+                              (default: directory name)
+  --verbose                   Show more output
+  --log-level LEVEL           Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+  --no-ansi                   Do not print ANSI control characters
+  -v, --version               Print version and exit
+  -H, --host HOST             Daemon socket to connect to
+
+  --tls                       Use TLS; implied by --tlsverify
+  --tlscacert CA_PATH         Trust certs signed only by this CA
+  --tlscert CLIENT_CERT_PATH  Path to TLS certificate file
+  --tlskey TLS_KEY_PATH       Path to TLS key file
+  --tlsverify                 Use TLS and verify the remote
+  --skip-hostname-check       Don't check the daemon's hostname against the
+                              name specified in the client certificate
+  --project-directory PATH    Specify an alternate working directory
+                              (default: the path of the Compose file)
+  --compatibility             If set, Compose will attempt to convert deploy
+                              keys in v3 files to their non-Swarm equivalent
+
+Commands:
+  build              Build or rebuild services
+  bundle             Generate a Docker bundle from the Compose file
+  config             Validate and view the Compose file
+  create             Create services
+  down               Stop and remove containers, networks, images, and volumes
+  events             Receive real time events from containers
+  exec               Execute a command in a running container
+  help               Get help on a command
+  images             List images
+  kill               Kill containers
+  logs               View output from containers
+  pause              Pause services
+  port               Print the public port for a port binding
+  ps                 List containers
+  pull               Pull service images
+  push               Push service images
+  restart            Restart services
+  rm                 Remove stopped containers
+  run                Run a one-off command
+  scale              Set number of containers for a service
+  start              Start services
+  stop               Stop services
+  top                Display the running processes
+  unpause            Unpause services
+  up                 Create and start containers
+  version            Show the Docker-Compose version information
+[root@localhost singlepeer]# sudo docker-compose version
+docker-compose version 1.23.2, build 1110ad0
+docker-py version: 3.6.0
+CPython version: 2.7.5
+OpenSSL version: OpenSSL 1.0.1e-fips 11 Feb 2013
+[root@localhost singlepeer]# 
+
+
+[lhf@localhost singlepeer]$ 
+[lhf@localhost singlepeer]$ 
+[lhf@localhost singlepeer]$ sudo docker exec -it cli bash
+[sudo] password for lhf: 
+root@31d1d9eaafbe:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer channel create -o orderer.example.com:7050 -c mychannel -f ./channel-artifacts/mychannel.tx
+2019-01-02 12:36:48.962 UTC [main] InitCmd -> WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable
+2019-01-02 12:36:49.032 UTC [main] SetOrdererEnv -> WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable
+2019-01-02 12:36:49.033 UTC [channelCmd] InitCmdFactory -> INFO 003 Endorser and orderer connections initialized
+2019-01-02 12:36:49.097 UTC [cli.common] readBlock -> INFO 004 Received block: 0
+root@31d1d9eaafbe:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer channel join -b mychannel.block
+2019-01-02 12:36:57.426 UTC [main] InitCmd -> WARN 001 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable
+2019-01-02 12:36:57.445 UTC [main] SetOrdererEnv -> WARN 002 CORE_LOGGING_LEVEL is no longer supported, please use the FABRIC_LOGGING_SPEC environment variable
+2019-01-02 12:36:57.446 UTC [channelCmd] InitCmdFactory -> INFO 003 Endorser and orderer connections initialized
+2019-01-02 12:36:57.525 UTC [channelCmd] executeJoin -> INFO 004 Successfully submitted proposal to join channel
+root@31d1d9eaafbe:/opt/gopath/src/github.com/hyperledger/fabric/peer# ^C
+root@31d1d9eaafbe:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+
+
+
+[root@localhost tvmExe]# mkdir -p $GOPATH/src/golang.org/x/
+[root@localhost tvmExe]# cd $GOPATH/src/golang.org/x/
+[root@localhost x]# git clone https://github.com/golang/net.git net
+正克隆到 'net'...
+remote: Enumerating objects: 118, done.
+remote: Counting objects: 100% (118/118), done.
+remote: Compressing objects: 100% (83/83), done.
+remote: Total 8091 (delta 49), reused 66 (delta 35), pack-reused 7973
+接收对象中: 100% (8091/8091), 6.57 MiB | 1.21 MiB/s, done.
+处理 delta 中: 100% (5577/5577), done.
+[root@localhost x]# go install net
+[root@localhost x]# go get golang.org/x/net/context
+[root@localhost x]# go get google.golang.org/grpc
+package google.golang.org/grpc: unrecognized import path "google.golang.org/grpc" (https fetch: Get https://google.golang.org/grpc?go-get=1: dial tcp 216.239.37.1:443: connect: connection refused)
+[root@localhost x]# git clone https://github.com/grpc/grpc-go.git $GOPATH/src/google.golang.org/grpc
+正克隆到 '/opt/gopath/src/google.golang.org/grpc'...
+remote: Enumerating objects: 36, done.
+remote: Counting objects: 100% (36/36), done.
+remote: Compressing objects: 100% (22/22), done.
+remote: Total 14442 (delta 14), reused 29 (delta 10), pack-reused 14406
+接收对象中: 100% (14442/14442), 7.09 MiB | 831.00 KiB/s, done.
+处理 delta 中: 100% (9138/9138), done.
+[root@localhost x]# cd $GOPATH/src/
+[root@localhost src]# go install google.golang.org/grpc
+google.golang.org/grpc/internal/channelz/types_linux.go:26:2: cannot find package "golang.org/x/sys/unix" in any of:
+	/usr/local/go/src/golang.org/x/sys/unix (from $GOROOT)
+	/opt/gopath/src/golang.org/x/sys/unix (from $GOPATH)
+golang.org/x/net/idna/idna.go:23:2: cannot find package "golang.org/x/text/secure/bidirule" in any of:
+	/usr/local/go/src/golang.org/x/text/secure/bidirule (from $GOROOT)
+	/opt/gopath/src/golang.org/x/text/secure/bidirule (from $GOPATH)
+golang.org/x/net/idna/idna.go:24:2: cannot find package "golang.org/x/text/unicode/bidi" in any of:
+	/usr/local/go/src/golang.org/x/text/unicode/bidi (from $GOROOT)
+	/opt/gopath/src/golang.org/x/text/unicode/bidi (from $GOPATH)
+golang.org/x/net/idna/idna.go:25:2: cannot find package "golang.org/x/text/unicode/norm" in any of:
+	/usr/local/go/src/golang.org/x/text/unicode/norm (from $GOROOT)
+	/opt/gopath/src/golang.org/x/text/unicode/norm (from $GOPATH)
+google.golang.org/grpc/status/status.go:37:2: cannot find package "google.golang.org/genproto/googleapis/rpc/status" in any of:
+	/usr/local/go/src/google.golang.org/genproto/googleapis/rpc/status (from $GOROOT)
+	/opt/gopath/src/google.golang.org/genproto/googleapis/rpc/status (from $GOPATH)
+[root@localhost src]# go get google.golang.org/grpc
+package google.golang.org/genproto/googleapis/rpc/status: unrecognized import path "google.golang.org/genproto/googleapis/rpc/status" (https fetch: Get https://google.golang.org/genproto/googleapis/rpc/status?go-get=1: dial tcp 216.239.37.1:443: connect: connection refused)
+package golang.org/x/sys/unix: unrecognized import path "golang.org/x/sys/unix" (https fetch: Get https://golang.org/x/sys/unix?go-get=1: dial tcp 216.239.37.1:443: connect: connection refused)
+package golang.org/x/text/secure/bidirule: unrecognized import path "golang.org/x/text/secure/bidirule" (https fetch: Get https://golang.org/x/text/secure/bidirule?go-get=1: dial tcp 216.239.37.1:443: connect: connection refused)
+^C
+[root@localhost src]# go build -o /trias-contract/tvmExe/main /opt/gopath/src/tvm-light/server/http/main.go
+google.golang.org/grpc/internal/channelz/types_linux.go:26:2: cannot find package "golang.org/x/sys/unix" in any of:
+	/usr/local/go/src/golang.org/x/sys/unix (from $GOROOT)
+	/opt/gopath/src/golang.org/x/sys/unix (from $GOPATH)
+golang.org/x/net/idna/idna.go:23:2: cannot find package "golang.org/x/text/secure/bidirule" in any of:
+	/usr/local/go/src/golang.org/x/text/secure/bidirule (from $GOROOT)
+	/opt/gopath/src/golang.org/x/text/secure/bidirule (from $GOPATH)
+golang.org/x/net/idna/idna.go:24:2: cannot find package "golang.org/x/text/unicode/bidi" in any of:
+	/usr/local/go/src/golang.org/x/text/unicode/bidi (from $GOROOT)
+	/opt/gopath/src/golang.org/x/text/unicode/bidi (from $GOPATH)
+golang.org/x/net/idna/idna.go:25:2: cannot find package "golang.org/x/text/unicode/norm" in any of:
+	/usr/local/go/src/golang.org/x/text/unicode/norm (from $GOROOT)
+	/opt/gopath/src/golang.org/x/text/unicode/norm (from $GOPATH)
+google.golang.org/grpc/status/status.go:37:2: cannot find package "google.golang.org/genproto/googleapis/rpc/status" in any of:
+	/usr/local/go/src/google.golang.org/genproto/googleapis/rpc/status (from $GOROOT)
+	/opt/gopath/src/google.golang.org/genproto/googleapis/rpc/status (from $GOPATH)
+[root@localhost src]# git clone https://github.com/golang/net.git $GOPATH/src/golang.org/x/net
+fatal: 目标路径 '/opt/gopath/src/golang.org/x/net' 已经存在，并且不是一个空目录。
+[root@localhost src]# git clone https://github.com/golang/text.git $GOPATH/src/golang.org/x/text
+正克隆到 '/opt/gopath/src/golang.org/x/text'...
+remote: Enumerating objects: 11, done.
+remote: Counting objects: 100% (11/11), done.
+remote: Compressing objects: 100% (9/9), done.
+remote: Total 5591 (delta 1), reused 7 (delta 1), pack-reused 5580
+接收对象中: 100% (5591/5591), 19.65 MiB | 1.30 MiB/s, done.
+处理 delta 中: 100% (3722/3722), done.
+[root@localhost src]# git clone https://github.com/google/go-genproto.git $GOPATH/src/google.golang.org/genproto
+正克隆到 '/opt/gopath/src/google.golang.org/genproto'...
+remote: Enumerating objects: 13, done.
+remote: Counting objects: 100% (13/13), done.
+remote: Compressing objects: 100% (7/7), done.
+remote: Total 9131 (delta 4), reused 11 (delta 4), pack-reused 9118
+接收对象中: 100% (9131/9131), 10.87 MiB | 1.21 MiB/s, done.
+处理 delta 中: 100% (4837/4837), done.
+[root@localhost src]# go install google.golang.org/grpc
+google.golang.org/grpc/internal/channelz/types_linux.go:26:2: cannot find package "golang.org/x/sys/unix" in any of:
+	/usr/local/go/src/golang.org/x/sys/unix (from $GOROOT)
+	/opt/gopath/src/golang.org/x/sys/unix (from $GOPATH)
+[root@localhost src]# git clone^C
+[root@localhost src]# ls
+github.com  golang.org  google.golang.org  gopkg.in  tvm-light
+[root@localhost src]# cd tvm-light/
+[root@localhost tvm-light]# ls
+config         crypto-config.yaml       python-script  utils
+configtx.yaml  docker-compose-cli.yaml  README.md      validate
+config.yml     firstContract.txt        server
+contract       proto                    trans
+[root@localhost tvm-light]# cd goog^C
+[root@localhost tvm-light]# cd ../google.golang.org/
+[root@localhost google.golang.org]# ls
+genproto  grpc
+[root@localhost google.golang.org]# cd g
+bash: cd: g: 没有那个文件或目录
+[root@localhost google.golang.org]# cd grpc/
+[root@localhost grpc]# ls
+AUTHORS                              interop
+backoff.go                           keepalive
+balancer                             LICENSE
+balancer_conn_wrappers.go            Makefile
+balancer.go                          metadata
+balancer_switching_test.go           naming
+balancer_test.go                     peer
+balancer_v1_wrapper.go               picker_wrapper.go
+benchmark                            picker_wrapper_test.go
+binarylog                            pickfirst.go
+call.go                              pickfirst_test.go
+call_test.go                         proxy.go
+channelz                             proxy_test.go
+clientconn.go                        README.md
+clientconn_state_transition_test.go  reflection
+clientconn_test.go                   resolver
+codec.go                             resolver_conn_wrapper.go
+codec_test.go                        resolver_conn_wrapper_test.go
+codegen.sh                           rpc_util.go
+codes                                rpc_util_test.go
+connectivity                         server.go
+CONTRIBUTING.md                      server_test.go
+credentials                          service_config.go
+dialoptions.go                       service_config_test.go
+doc.go                               stats
+Documentation                        status
+encoding                             stream.go
+examples                             stress
+go.mod                               tap
+go.sum                               test
+grpclog                              testdata
+health                               trace.go
+install_gae.sh                       version.go
+interceptor.go                       vet.sh
+internal
+[root@localhost grpc]# cd ..
+[root@localhost google.golang.org]# ls
+genproto  grpc
+[root@localhost google.golang.org]# cd ..
+[root@localhost src]# ls
+github.com  golang.org  google.golang.org  gopkg.in  tvm-light
+[root@localhost src]# cd tvm-light/server/http/
+[root@localhost http]# ls
+main.go
+[root@localhost http]# go build -o main main.go
+../../../google.golang.org/grpc/internal/channelz/types_linux.go:26:2: cannot find package "golang.org/x/sys/unix" in any of:
+	/usr/local/go/src/golang.org/x/sys/unix (from $GOROOT)
+	/opt/gopath/src/golang.org/x/sys/unix (from $GOPATH)
+[root@localhost http]# cd -
+/opt/gopath/src
+[root@localhost src]# ls
+github.com  golang.org  google.golang.org  gopkg.in  tvm-light
+[root@localhost src]# cd golang.org/x/
+[root@localhost x]# ls
+net  text
+[root@localhost x]# cd $GOPATH/src/golang.org/x/
+[root@localhost x]# git clone https://github.com/golang/sys
+正克隆到 'sys'...
+remote: Enumerating objects: 274, done.
+remote: Counting objects: 100% (274/274), done.
+remote: Compressing objects: 100% (108/108), done.
+remote: Total 6465 (delta 204), reused 206 (delta 166), pack-reused 6191
+接收对象中: 100% (6465/6465), 5.02 MiB | 56.00 KiB/s, done.
+处理 delta 中: 100% (5511/5511), done.
+[root@localhost x]# cd $GOPATH/src/
+[root@localhost src]# go install google.golang.org/grpc
+[root@localhost src]# go build -o /trias-contract/tvmExe/main /opt/gopath/src/tvm-light/server/http/main.go
+[root@localhost src]# nohup /trias-contract/tvmExe/main &
+[1] 10382
+[root@localhost src]# nohup: 忽略输入并把输出追加到"nohup.out"
+
+[root@localhost src]# 
+[root@localhost src]# ls
+
+
+ tail -f nohup.out 
+8088
+^C
+[root@localhost src]# ^C
+[root@localhost src]# lsof -i:8088
+COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+main    10382 root    3u  IPv6 266510      0t0  TCP *:radan-http (LISTEN)
+[root@localhost src]# ifconfig
+ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.130.143  netmask 255.255.255.0  broadcast 192.168.130.255
+        inet6 fe80::7126:e7d:350:4ad  prefixlen 64  scopeid 0x20<link>
+        ether 00:0c:29:09:d6:2a  txqueuelen 1000  (Ethernet)
+        RX packets 1025795  bytes 206535125 (196.9 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 980777  bytes 110067649 (104.9 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1  (Local Loopback)
+        RX packets 56011  bytes 3558544 (3.3 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 56011  bytes 3558544 (3.3 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+virbr0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        inet 192.168.122.1  netmask 255.255.255.0  broadcast 192.168.122.255
+        ether 52:54:00:db:6b:c5  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+[root@localhost src]# cd tvm-light/server/http/
+[root@localhost http]# ls
+main.go
+[root@localhost http]# vim main.go 
+[root@localhost http]# 
+
+
+
+
+ipfs:
+peer identity: QmepjzTJH2e2Wx8rznNHddQiPqZS1S2Tt6havj9LE8pBNy
+to get started, enter:
+
+        ipfs cat /ipfs/QmS4ustL54uo8FzR9455qaxZwuMiUhyvMcX9Ba8nUH4uVv/readme
